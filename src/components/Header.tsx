@@ -1,4 +1,10 @@
 import { useState } from "react";
+import { NavLink, Link } from "react-router-dom";
+
+interface navLinksProps {
+    path: string;
+    label: string;
+}
 
 const Header = () => {
     const [isNavToggle, setIsNavToggle] = useState(false);
@@ -13,13 +19,24 @@ const Header = () => {
         }
     };
 
+    const navLinks: navLinksProps[] = [
+        {
+            path: "/",
+            label: "Product",
+        },
+        {
+            path: "/about",
+            label: "About Us",
+        },
+    ];
+
     return (
         <header className={`header ${isNavToggle ? "mobile-menu" : ""}`}>
             <div className="container">
                 <nav className="nav">
-                    <a href="/" className="nav__logo">
+                    <Link to="/" className="nav__logo">
                         <img src="/images/logo.png" alt="Logo" />
-                    </a>
+                    </Link>
 
                     <button
                         className={`navbar-toggler ${
@@ -35,17 +52,22 @@ const Header = () => {
                     </button>
 
                     <ul className="nav__links">
-                        <li className="nav__link-item">
-                            <a href="/" className="nav__link nav__link--active">
-                                Product
-                            </a>
-                        </li>
-
-                        <li className="nav__link-item">
-                            <a href="/" className="nav__link">
-                                About Us
-                            </a>
-                        </li>
+                        {navLinks.map((item) => (
+                            <li className="nav__link-item" key={item.path}>
+                                <NavLink
+                                    to={item.path}
+                                    className={({ isActive, isPending }) =>
+                                        isPending
+                                            ? "nav__link"
+                                            : isActive
+                                            ? "nav__link nav__link--active"
+                                            : "nav__link"
+                                    }
+                                >
+                                    {item.label}
+                                </NavLink>
+                            </li>
+                        ))}
                     </ul>
                 </nav>
             </div>

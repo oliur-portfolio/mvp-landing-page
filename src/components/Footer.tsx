@@ -1,4 +1,37 @@
+import { Link } from "react-router-dom";
+
+interface footerLinksProps {
+    path: string;
+    label: string;
+}
+
 const Footer = () => {
+    const legalLinks: footerLinksProps[] = [
+        {
+            path: "/terms",
+            label: "Terms of Use",
+        },
+        {
+            path: "/privacy",
+            label: "Privacy Policy",
+        },
+    ];
+
+    const companyLinks: footerLinksProps[] = [
+        {
+            path: "/contact",
+            label: "Contact Us",
+        },
+        {
+            path: "/about",
+            label: "About Us",
+        },
+        {
+            path: "/careers",
+            label: "Careers",
+        },
+    ];
+
     return (
         <footer className="footer-area">
             <div className="container">
@@ -13,23 +46,16 @@ const Footer = () => {
                                 <h5>Legal</h5>
 
                                 <ul className="footer__nav-list">
-                                    <li>
-                                        <a
-                                            href="#"
-                                            className="footer__nav-link"
-                                        >
-                                            Terms of Use
-                                        </a>
-                                    </li>
-
-                                    <li>
-                                        <a
-                                            href="#"
-                                            className="footer__nav-link"
-                                        >
-                                            Privacy Policy
-                                        </a>
-                                    </li>
+                                    {legalLinks.map((item) => (
+                                        <li key={item.path}>
+                                            <Link
+                                                to={item.path}
+                                                className="footer__nav-link"
+                                            >
+                                                {item.label}
+                                            </Link>
+                                        </li>
+                                    ))}
                                 </ul>
                             </div>
 
@@ -37,32 +63,16 @@ const Footer = () => {
                                 <h5>Company</h5>
 
                                 <ul className="footer__nav-list">
-                                    <li>
-                                        <a
-                                            href="#"
-                                            className="footer__nav-link"
-                                        >
-                                            Contact Us
-                                        </a>
-                                    </li>
-
-                                    <li>
-                                        <a
-                                            href="#"
-                                            className="footer__nav-link"
-                                        >
-                                            About Us
-                                        </a>
-                                    </li>
-
-                                    <li>
-                                        <a
-                                            href="#"
-                                            className="footer__nav-link"
-                                        >
-                                            Careers
-                                        </a>
-                                    </li>
+                                    {companyLinks.map((item) => (
+                                        <li key={item.path}>
+                                            <Link
+                                                to={item.path}
+                                                className="footer__nav-link"
+                                            >
+                                                {item.label}
+                                            </Link>
+                                        </li>
+                                    ))}
                                 </ul>
                             </div>
                         </div>
